@@ -1,0 +1,21 @@
+﻿@page "/"
+@using RealtimeDataApp.Models
+@using RealtimeDataApp.Services;
+@inject OvstService ovstService
+
+<PageTitle>Home</PageTitle>
+
+@foreach(var ovst in OvstsList)
+{
+    <p>@ovst.Vn @ovst.Hn @ovst.Hcode</p>
+}
+
+@code {
+    List<Ovst> OvstsList = new List<Ovst>();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        OvstsList = await ovstService.GetAllOvst();
+    }
+}
+    
